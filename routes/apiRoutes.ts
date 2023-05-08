@@ -9,6 +9,13 @@ dotenv.config();
 const router = express.Router();
 const prisma = new PrismaClient({ log: ["query", "error"] });
 
+router.get("/api/test", async (req: Request, res: Response) => {
+
+  res.json({
+    message: "Systems nominal."
+  })
+})
+
 router.get("/api/workout", async (req: Request, res: Response) => {
   const workouts = await prisma.workout.findMany();
 
@@ -17,14 +24,18 @@ router.get("/api/workout", async (req: Request, res: Response) => {
   res.json(workout);
 });
 
-router.post("api/rep", async (req: Request, res: Response) => {
-  const newWorkout = await prisma.workout.create({
+router.post("/api/rep", async (req: Request, res: Response) => {
+  const newWorkout = await prisma.reps.create({
     data: {
-      name: req.body.name,
+      reps_completed: req.body.reps_completed,
+      workoutName: req.body.workoutName,
+      userId: req.body.userId
     },
   });
 
   res.json(newWorkout);
 });
+
+
 
 module.exports = router;
