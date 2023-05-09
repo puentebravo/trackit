@@ -19,6 +19,7 @@
   "author": "puentebravo",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.15.11",
