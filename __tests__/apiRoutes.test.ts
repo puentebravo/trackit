@@ -20,5 +20,14 @@ describe("api route tests", () => {
         expect(response.statusCode).toBe(200);
     })
 
+    test("/login should return a 200 status code", async () => {
+        const response = await request(baseUrl).post("/api/login").send({
+            username: "aJensen",
+            password: "ineveraskedforthis"
+        })
+
+        expect(response.statusCode).toBe(200)
+    })
+
 })
 
