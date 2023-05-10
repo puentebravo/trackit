@@ -1,41 +1,87 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-import { Request, Response } from "express";
+import bcrypt from "bcryptjs";
 
 import * as dotenv from "dotenv";
 
 dotenv.config();
 
+declare module "express-session" {
+  interface SessionData {
+    loggedIn: boolean;
+  }
+}
+
 const router = express.Router();
 const prisma = new PrismaClient({ log: ["query", "error"] });
 
-router.get("/api/test", async (req: Request, res: Response) => {
-
+router.get("/api/test", async (req: express.Request, res: express.Response) => {
   res.json({
-    message: "Systems nominal."
-  })
-})
-
-router.get("/api/workout", async (req: Request, res: Response) => {
-  const workouts = await prisma.workout.findMany();
-
-  const workout = workouts[Math.floor(Math.random() * workouts.length)];
-  console.log(workout)
-  res.json(workout);
+    message: "Systems nominal.",
+  });
 });
 
-router.post("/api/rep", async (req: Request, res: Response) => {
+router.get(
+  "/api/workout",
+  async (req: express.Request, res: express.Response) => {
+    const workouts = await prisma.workout.findMany();
+
+    const workout = workouts[Math.floor(Math.random() * workouts.length)];
+    console.log(workout);
+    res.json(workout);
+  }
+);
+
+router.post("/api/rep", async (req: express.Request, res: express.Response) => {
   const newWorkout = await prisma.reps.create({
     data: {
       reps_completed: req.body.reps_completed,
       workoutName: req.body.workoutName,
-      userId: req.body.userId
+      userId: req.body.userId,
     },
   });
 
   res.json(newWorkout);
 });
 
+router.post(
+  "/api/login",
+  async (req: express.Request, res: express.Response) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: req.body.username,
+      },
+    });
 
+    if (user) {
+      if (!user.isFederated && user.password) {
+        const isValid = bcrypt.compareSync(req.body.password, user.password);
+
+        if (!isValid) {
+          res
+            .status(400)
+            .json({
+              message: "Incorrect login credentials. Please try again!",
+            });
+
+          return;
+        }
+
+        req.session.save(() => {
+          req.session.loggedIn = true;
+
+          res.status(200).json({
+            user: user.id,
+            message: "Login successful!",
+          });
+        });
+      }
+    } else {
+      res.status(400).json({
+        message: "User not found.",
+      });
+    }
+  }
+);
 
 module.exports = router;
