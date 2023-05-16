@@ -29,5 +29,17 @@ describe("api route tests", () => {
         expect(response.statusCode).toBe(200)
     })
 
+    test("/signup/local should return a 200 status code", async () => {
+
+        const rng = Math.floor(Math.random() * 100)
+        const response = await request(baseUrl).post("/api/signup/local").send({
+            username: `fPritchard${rng}`,
+            name: `Frank Pritchard${rng}`,
+            password: `whyadamwhy${rng}`
+        })
+
+        expect(response.statusCode).toBe(200)
+    })
+
 })
 
