@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 
 import * as dotenv from "dotenv";
@@ -58,11 +59,9 @@ router.post(
         const isValid = bcrypt.compareSync(req.body.password, user.password);
 
         if (!isValid) {
-          res
-            .status(400)
-            .json({
-              message: "Incorrect login credentials. Please try again!",
-            });
+          res.status(400).json({
+            message: "Incorrect login credentials. Please try again!",
+          });
 
           return;
         }
@@ -80,6 +79,29 @@ router.post(
       res.status(400).json({
         message: "User not found.",
       });
+    }
+  }
+);
+
+router.post(
+  "/api/signup/local",
+  body(["username, password"]).isAscii(),
+  async (req: express.Request, res: express.Response) => {
+    const hash = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+    try {
+      const newUser = await prisma.user.create({
+        data: {
+          username: req.body.username,
+          isFederated: false,
+          name: req.body.name,
+          password: hash,
+        },
+      });
+
+      res.status(200).json(newUser);
+    } catch (error) {
+      res.status(500).json({ message: error });
     }
   }
 );
