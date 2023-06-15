@@ -1,0 +1,31 @@
+:root {
+  --pink: #ec5d7f;
+}
+
+#splashText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40vw;
+  margin: 40vw;
+
+}
+
+#headerText {
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-style: normal;
+  font-weight: 750;
+  font-size: 32px;
+  line-height: 38px;
+  color: var(--pink);
+}
+
+#subText {
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-style: normal;
+  font-weight: 750;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--pink);
+}
