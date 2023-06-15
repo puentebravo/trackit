@@ -1,19 +1,11 @@
 version: "0.1"
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    ports:
-      - "80:80"
-    restart: unless-stopped
 
   server:
     build:
       context: .
       dockerfile: dockerfile
     container_name: trackit_server
-    depends_on:
-      - nginx
     ports:
       - "8080:8080"
     restart: always
