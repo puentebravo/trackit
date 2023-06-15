@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./landing.css"
 
 function Landing() {
+
+    const navigate = useNavigate()
+    
+    useEffect( () => {
+        setTimeout(() => {
+            navigate("/login")
+        }, 3000)
+    }, [])
+
     return (
-        <header>
-            <h1>Landing page reached.</h1>
-        </header>
+        <main id="splashText">
+            <h1 id="headerText">.solid</h1>
+            <p id="subText">between meeting fitness</p>
+        </main>
     )
 }
 
