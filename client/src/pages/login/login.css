@@ -1,0 +1,46 @@
+:root {
+    --pink: #ec5d7f;
+  }
+
+  #brandHeader, #loginContainer {
+    animation: fadeIn 1s
+  }
+
+  .loginField {
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--pink);
+    margin-bottom: 5vh;
+  }
+
+  #loginBtn {
+    background: var(--pink);
+    color: white;
+    font-family: "Helvetica Neue LT Std", sans-serif;
+    font-style: normal;
+    font-weight: 750;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    margin-top: 2vh;
+    border-radius: 8px;
+    height: 54px;
+  }
+
+  #loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  #loginContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+    margin-top: 35vh;
+  }
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
