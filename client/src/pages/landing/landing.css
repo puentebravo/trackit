@@ -8,7 +8,7 @@
   justify-content: center;
   width: 40vw;
   margin: 40vw;
-  animation: fadeIn 1s
+  animation: fadeIn 1s;
 }
 
 #headerText {
