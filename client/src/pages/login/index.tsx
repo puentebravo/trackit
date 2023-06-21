@@ -1,5 +1,6 @@
 import React from "react";
 import BrandBar from "../../components/brandBar";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik"
 import "./login.css"
 
@@ -7,11 +8,23 @@ function Login() {
 
     const formik = useFormik({
         initialValues: {
-            userName: "",
+            username: "",
             password: ""
         },
         onSubmit: (values) => {
             console.log(values)
+            fetch("/api/login", {
+                method: "POST",
+                body: JSON.stringify(values),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then( response => {
+                console.log(response)
+                return response.json()
+            }).then( data => {
+                console.log(data)
+            })
         }
     })
 
@@ -23,11 +36,11 @@ function Login() {
                 <form id="loginForm" onSubmit={formik.handleSubmit}>
                     <input
                         type="text"
-                        name="userName"
-                        id="userName"
+                        name="username"
+                        id="username"
                         className="loginField"
                         onChange={formik.handleChange}
-                        value={formik.values.userName}
+                        value={formik.values.username}
                         placeholder="Username"
                     />
                     <input
