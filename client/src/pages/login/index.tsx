@@ -6,6 +6,8 @@ import "./login.css"
 
 function Login() {
 
+    const navigate = useNavigate()
+
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -21,9 +23,12 @@ function Login() {
                 }
             }).then( response => {
                 console.log(response)
-                return response.json()
-            }).then( data => {
-                console.log(data)
+                if (response.status === 200) {
+                    navigate("/home")
+                } else {
+                    navigate("/login")
+                }
+
             })
         }
     })
