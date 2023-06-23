@@ -7,7 +7,8 @@
   flex-direction: column;
   justify-content: center;
   width: 40vw;
-  margin: 40vw;
+  margin: 30vw;
+  margin-top: 40vh;
   animation: fadeIn 1s;
 }
 
