@@ -83,6 +83,17 @@ router.post(
   }
 );
 
+router.get(
+  "/api/logout",
+  async (req: express.Request, res: express.Response) => {
+    req.session.destroy(() => {
+      res.status(200).json({
+        message: "Session terminated",
+      });
+    });
+  }
+);
+
 router.post(
   "/api/signup/local",
   body(["username, password"]).isAscii(),
