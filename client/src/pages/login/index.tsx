@@ -8,6 +8,8 @@ function Login() {
 
     const navigate = useNavigate()
 
+    // Initialize formik component, set login call to run on submit
+
     const formik = useFormik({
         initialValues: {
             username: "",
