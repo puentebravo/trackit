@@ -6,6 +6,7 @@ function Landing() {
 
     const navigate = useNavigate()
     
+    // Displays splash screen for five seconds on load
     useEffect( () => {
         setTimeout(() => {
             navigate("/login")
