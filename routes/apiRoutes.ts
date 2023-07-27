@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import promptWorkout from "../utils/prompts";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 
@@ -10,6 +11,7 @@ dotenv.config();
 declare module "express-session" {
   interface SessionData {
     loggedIn: boolean;
+    userId: string;
   }
 }
 
@@ -25,20 +27,21 @@ router.get("/api/test", async (req: express.Request, res: express.Response) => {
 router.get(
   "/api/workout",
   async (req: express.Request, res: express.Response) => {
-    const workouts = await prisma.workout.findMany();
 
-    const workout = workouts[Math.floor(Math.random() * workouts.length)];
-    console.log(workout);
+    const workout = await promptWorkout("five")
+
     res.json(workout);
   }
 );
 
 router.post("/api/rep", async (req: express.Request, res: express.Response) => {
+ 
+
   const newWorkout = await prisma.reps.create({
     data: {
       reps_completed: req.body.reps_completed,
       workoutName: req.body.workoutName,
-      userId: req.body.userId,
+      userId: req.body.userId
     },
   });
 
@@ -68,6 +71,7 @@ router.post(
 
         req.session.save(() => {
           req.session.loggedIn = true;
+          req.session.userId = user.id;
 
           res.status(200).json({
             user: user.id,
