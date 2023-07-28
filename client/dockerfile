@@ -1,4 +1,4 @@
-FROM node:16.15.1
+FROM node:18.13.0
 
 WORKDIR /srv/client
 
