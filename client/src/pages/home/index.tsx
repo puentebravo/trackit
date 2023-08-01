@@ -28,7 +28,7 @@ function Home() {
 
     useEffect(() => {
         fetch("/api/workout").then(response => response.json()).then(data => {
-            setWorkout(data.name)
+            setWorkout(data.workout)
         })
     }, [])
 
