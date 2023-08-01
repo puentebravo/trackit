@@ -1,9 +1,11 @@
+import { Request, Response } from "express";
 const express = require("express");
 const PORT = process.env.port || 3001;
 const app = express();
 const routes = require("./routes/apiRoutes");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const path = require('path')
 
 require("dotenv").config();
 
@@ -27,6 +29,11 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
+
+app.get("/*", function (req: Request, res: Response) {
+  res.sendFile(path.join(__dirname, "build", "index.html"))
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server now listening on ${PORT}.`);
