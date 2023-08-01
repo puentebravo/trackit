@@ -105,3 +105,6 @@ dist
 
 #lock file
 package-lock.json
+
+#TS build folder
+build
