@@ -27,21 +27,18 @@ router.get("/api/test", async (req: express.Request, res: express.Response) => {
 router.get(
   "/api/workout",
   async (req: express.Request, res: express.Response) => {
-
-    const workout = await promptWorkout("five")
+    const workout = await promptWorkout("five");
 
     res.json(workout);
   }
 );
 
 router.post("/api/rep", async (req: express.Request, res: express.Response) => {
- 
-
   const newWorkout = await prisma.reps.create({
     data: {
       reps_completed: req.body.reps_completed,
       workoutName: req.body.workoutName,
-      userId: req.body.userId
+      userId: req.body.userId,
     },
   });
 
