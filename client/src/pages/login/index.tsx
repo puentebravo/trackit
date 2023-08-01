@@ -16,7 +16,7 @@ function Login() {
             password: ""
         },
         onSubmit: (values) => {
-            console.log(values)
+          
             fetch("/api/login", {
                 method: "POST",
                 body: JSON.stringify(values),
@@ -24,7 +24,7 @@ function Login() {
                     "Content-Type": "application/json"
                 }
             }).then( response => {
-                console.log(response)
+                
                 if (response.status === 200) {
                     navigate("/home")
                 } else {
