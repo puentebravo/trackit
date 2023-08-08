@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const model = new OpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
-  temperature: 0,
+  temperature: 1,
   modelName: "gpt-3.5-turbo",
 });
 
@@ -23,7 +23,7 @@ const promptWorkout = async (input: string) => {
   try {
     const prompt = new PromptTemplate({
       template:
-        "You are a fitness expert. Please give the user a workout of the length they specify. \n{format_instructions}  \n {time}",
+        "You are an Olympic-level fitness trainer. Please give the user a workout of the length they specify. \n{format_instructions}  \n {time}",
       inputVariables: ["time"],
       partialVariables: { format_instructions: formatInstructions },
     });
