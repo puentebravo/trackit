@@ -1,4 +1,4 @@
-FROM node:16.15.1
+FROM node:18.13.0
 
 WORKDIR /srv/client
 
@@ -6,10 +6,10 @@ COPY package*.json ./
 
 COPY tsconfig.json ./
 
-COPY . .
+COPY build .
 
 RUN npm install
 
 EXPOSE 3000
 
-CMD npm start
+CMD npm run prod

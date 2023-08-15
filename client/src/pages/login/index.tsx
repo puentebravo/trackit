@@ -15,7 +15,6 @@ function Login() {
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values);
       fetch("/api/login", {
         method: "POST",
         body: JSON.stringify(values),

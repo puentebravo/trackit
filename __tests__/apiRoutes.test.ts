@@ -7,7 +7,7 @@ describe("api route tests", () => {
     const response = await request(baseUrl).get("/api/workout");
 
     expect(response.statusCode).toBe(200);
-  });
+  }, 10000);
 
   test("/rep should return a 200 status code", async () => {
     const response = await request(baseUrl).post("/api/rep").send({
