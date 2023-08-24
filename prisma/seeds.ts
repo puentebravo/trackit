@@ -19,25 +19,6 @@ async function runSeed() {
     },
   });
 
-  await prisma.workout.createMany({
-    data: [
-      {
-        name: "Push ups",
-      },
-      {
-        name: "Pull ups",
-      },
-      {
-        name: "Squats",
-      },
-      {
-        name: "Sit-ups",
-      },
-      {
-        name: "Squat-thrusts",
-      },
-    ],
-  });
 }
 
 runSeed()
