@@ -4,15 +4,15 @@ const baseUrl = "http://localhost:3001";
 
 describe("api route tests", () => {
   test("/workout should return a 200 code", async () => {
-    const response = await request(baseUrl).get("/api/workout");
+    const response = await request(baseUrl).get("/api/workout/5");
 
     expect(response.statusCode).toBe(200);
   }, 10000);
 
   test("/rep should return a 200 status code", async () => {
     const response = await request(baseUrl).post("/api/rep").send({
-      reps_completed: 5,
-      workoutName: "Squats",
+      workout: "Warm-up, Squats, Push-ups, Lunges, Plank, Burpees, Mountain climbers, Russian twists, Cool-down",
+      length: "10 Minutes",
       userId: "643f4044ca7b932abdf9fb1c",
     });
 
