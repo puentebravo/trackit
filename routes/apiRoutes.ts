@@ -25,9 +25,12 @@ router.get("/api/test", async (req: express.Request, res: express.Response) => {
 });
 
 router.get(
-  "/api/workout",
+  "/api/workout/:time",
   async (req: express.Request, res: express.Response) => {
-    const workout = await promptWorkout("five");
+
+    const promptTime: string = req.params.time
+
+    const workout = await promptWorkout(promptTime);
 
     res.json(workout);
   }
@@ -36,11 +39,11 @@ router.get(
 router.post("/api/rep", async (req: express.Request, res: express.Response) => {
   const newWorkout = await prisma.reps.create({
     data: {
-      reps_completed: req.body.reps_completed,
-      workoutName: req.body.workoutName,
-      userId: req.body.userId,
-    },
-  });
+      workout: req.body.workout,
+      workoutLength: req.body.length,
+      userId: req.body.userId
+    }
+  })
 
   res.json(newWorkout);
 });
