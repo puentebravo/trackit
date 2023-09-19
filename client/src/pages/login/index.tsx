@@ -22,12 +22,18 @@ function Login() {
           "Content-Type": "application/json",
         },
       }).then((response) => {
-        if (response.status === 200) {
+
+
+        return response.json()
+      }).then(data => {
+        if (data.user) {
+
+          localStorage.setItem("user", JSON.stringify(data.user))
           navigate("/home");
         } else {
           navigate("/login");
         }
-      });
+      })
     },
   });
 
