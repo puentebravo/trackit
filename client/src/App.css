@@ -1,14 +1,14 @@
 :root {
-  --pink: #EC5D7F;
+  --pink: #ec5d7f;
 }
 
 #brandHeader {
-  font-family: 'Helvetica Neue LT Std', sans-serif;
-font-style: normal;
-font-weight: 750;
-font-size: 22px;
-line-height: 26px;
-text-align: start;
-margin-left: 5vw;
-color: var(--pink)
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-style: normal;
+  font-weight: 750;
+  font-size: 22px;
+  line-height: 26px;
+  text-align: start;
+  margin-left: 5vw;
+  color: var(--pink);
 }
