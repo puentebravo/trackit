@@ -41,6 +41,11 @@
     margin-top: 35vh;
   }
 
+  #repsHeader {
+    font-family: "Helvetica Neue LT Std", sans-serif;
+    color: var(--pink);
+  }
+
 @keyframes fadeIn {
   0% {opacity: 0;}
   100% {opacity: 1;}
