@@ -13,7 +13,7 @@
     margin-bottom: 5vh;
   }
 
-  #submitBtn {
+  .submitBtn {
     background: var(--pink);
     color: white;
     font-family: "Helvetica Neue LT Std", sans-serif;
@@ -26,6 +26,18 @@
     border-radius: 8px;
     height: 54px;
   }
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+    margin-top: 35vh;
+    animation: fadeIn 1s;
+  }
+
+  .hidden {
+    display: none;
+  }
 
   #repsForm {
     display: flex;
@@ -33,18 +45,13 @@
     justify-content: center;
   }
 
-  #formContainer {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    margin: auto;
-    margin-top: 35vh;
-  }
 
-  #repsHeader {
+  #repsHeader, #minHeader {
     font-family: "Helvetica Neue LT Std", sans-serif;
     color: var(--pink);
   }
+
+
 
 @keyframes fadeIn {
   0% {opacity: 0;}
