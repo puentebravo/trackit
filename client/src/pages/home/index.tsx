@@ -4,7 +4,10 @@ import { useFormik } from "formik"
 import "./home.css"
 
 function Home() {
-    const [workout, setWorkout] = useState<String>("")
+    const [workout, setWorkout] = useState<String>
+    ("")
+
+    const [loading, setLoading] = useState<Boolean>(false)
 
     const repForm = useFormik({
         initialValues: {
@@ -30,10 +33,13 @@ function Home() {
             minutes: ""
         },
         onSubmit: (values) => {
+
+            setLoading(true)
             fetch(`/api/workout/${values.minutes}`)
                 .then(response => response.json())
                 .then(data => {
                     setWorkout(data.workout)
+                    
                 })
         }
     })
@@ -47,7 +53,7 @@ function Home() {
         <>
             <BrandBar />
 
-            <section id="minFormContainer">
+            <section className={loading ? "formContainer hidden" : "formContainer"}>
                 <h3 id="minHeader">How much time do you have?</h3>
                 <form id="repsForm" onSubmit={minForm.handleSubmit}>
                     <input
@@ -59,12 +65,12 @@ function Home() {
                         value={minForm.values.minutes}
                         placeholder="I have this many minutes to workout"
                     />
-                    <button type="submit" id="minuteBtn">Give me a workout!</button>
+                    <button type="submit" className="submitBtn">Give me a workout!</button>
 
                 </form>
             </section>
 
-            <section id="formContainer">
+            <section className={loading ? "formContainer" : "formContainer hidden"}>
                 <h3 id="repsHeader">{`Do ${workout}`}</h3>
                 <form id="repsForm" onSubmit={repForm.handleSubmit}>
                     <input
@@ -76,7 +82,7 @@ function Home() {
                         value={repForm.values.reps}
                         placeholder="How many did you do?"
                     />
-                    <button type="submit" id="submitBtn">Send it</button>
+                    <button type="submit" className="submitBtn">Send it</button>
 
                 </form>
             </section>
