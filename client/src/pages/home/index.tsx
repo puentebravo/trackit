@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import BrandBar from "../../components/brandBar";
 import { useFormik } from "formik"
 import "./home.css"
+import ProgressBar from "../../components/progressBar";
 
 function Home() {
-    const [workout, setWorkout] = useState<String>
-    ("")
+    const [workout, setWorkout] = useState<String>("")
 
     const [loading, setLoading] = useState<Boolean>(false)
+
+    const [submitted, setSubmitted] = useState<Boolean>(false)
 
     const repForm = useFormik({
         initialValues: {
@@ -32,14 +34,16 @@ function Home() {
         initialValues: {
             minutes: ""
         },
-        onSubmit: (values) => {
+        onSubmit: ({ minutes }) => {
 
             setLoading(true)
-            fetch(`/api/workout/${values.minutes}`)
+            setSubmitted(true)
+            fetch(`/api/workout/${minutes}`)
                 .then(response => response.json())
                 .then(data => {
+                    setLoading(false)
                     setWorkout(data.workout)
-                    
+
                 })
         }
     })
@@ -53,7 +57,7 @@ function Home() {
         <>
             <BrandBar />
 
-            <section className={loading ? "formContainer hidden" : "formContainer"}>
+            <section className={submitted ? "formContainer hidden" : "formContainer"}>
                 <h3 id="minHeader">How much time do you have?</h3>
                 <form id="repsForm" onSubmit={minForm.handleSubmit}>
                     <input
@@ -63,14 +67,19 @@ function Home() {
                         className="formField"
                         onChange={minForm.handleChange}
                         value={minForm.values.minutes}
-                        placeholder="I have this many minutes to workout"
+                        placeholder="Tell us how many minutes you have - we'll do the rest"
                     />
                     <button type="submit" className="submitBtn">Give me a workout!</button>
 
                 </form>
             </section>
 
-            <section className={loading ? "formContainer" : "formContainer hidden"}>
+            <section className={loading ? "loadSection" : "loadSection hidden"}>
+                <h3 id="loadHeader">Creating your custom workout - get psyched!</h3>
+                <ProgressBar />
+            </section>
+
+            <section className={workout ? "formContainer" : "formContainer hidden"}>
                 <h3 id="repsHeader">{`Do ${workout}`}</h3>
                 <form id="repsForm" onSubmit={repForm.handleSubmit}>
                     <input
