@@ -1,59 +1,83 @@
 :root {
-    --pink: #ec5d7f;
-  }
+  --pink: #ec5d7f;
+}
 
+#brandHeader,
+#homeContainer {
+  animation: fadeIn 1s;
+}
 
-  #brandHeader, #homeContainer {
-    animation: fadeIn 1s
-  }
+.formField {
+  border: 1px solid transparent;
+  border-bottom: 1px solid var(--pink);
+  margin-bottom: 5vh;
+}
 
-  .formField {
-    border: 1px solid transparent;
-    border-bottom: 1px solid var(--pink);
-    margin-bottom: 5vh;
-  }
+.submitBtn {
+  background: var(--pink);
+  color: white;
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-style: normal;
+  font-weight: 750;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin-top: 2vh;
+  border-radius: 8px;
+  height: 54px;
+}
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: auto;
+  margin-top: 35vh;
+  animation: fadeIn 1s;
+}
 
-  .submitBtn {
-    background: var(--pink);
-    color: white;
-    font-family: "Helvetica Neue LT Std", sans-serif;
-    font-style: normal;
-    font-weight: 750;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    margin-top: 2vh;
-    border-radius: 8px;
-    height: 54px;
-  }
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    margin: auto;
-    margin-top: 35vh;
-    animation: fadeIn 1s;
-  }
+.loadSection {
+  width: 50vw;
+  margin: auto;
+  margin-top: 40vh;
+}
 
-  .hidden {
-    display: none;
-  }
+.hidden {
+  display: none;
+}
 
-  #repsForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+#repsForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+#repsHeader,
+#minHeader,
+#loadHeader {
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  color: var(--pink);
+}
 
-  #repsHeader, #minHeader {
-    font-family: "Helvetica Neue LT Std", sans-serif;
-    color: var(--pink);
-  }
+/* Loading bar style */
 
-
+.progress {
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(#ec5d7f 0 0) left/0% 100% no-repeat #e0e2db;
+  animation: progressLoader 2s infinite linear;
+}
 
 @keyframes fadeIn {
-  0% {opacity: 0;}
-  100% {opacity: 1;}
-} 
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes progressLoader {
+  100% {
+    background-size: 100% 100%;
+  }
+}
