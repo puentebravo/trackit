@@ -2,7 +2,7 @@ FROM node:18.13.0
 
 WORKDIR /srv
 
-COPY package*.json ./
+COPY package.json ./
 
 COPY prisma ./prisma/
 
@@ -10,7 +10,7 @@ COPY .env ./
 
 COPY tsconfig.json ./
 
-COPY build .
+COPY . .
 
 RUN npm install && npx prisma generate
 
