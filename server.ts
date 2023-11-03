@@ -30,9 +30,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-// app.get("/*", function (req: Request, res: Response) {
-//   res.sendFile(path.join(__dirname, "public", "index.html"))
-// })
+app.get("*", function (req: Request, res: Response) {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"))
+})
 
 
 app.listen(PORT, () => {
