@@ -14,6 +14,8 @@ COPY . .
 
 RUN npm install && npx prisma generate
 
+RUN 
+
 EXPOSE 3001
 
 CMD npm run prod
