@@ -1,6 +1,6 @@
 FROM node:18.13.0
 
-WORKDIR /srv
+WORKDIR /trackit
 
 COPY package.json ./
 
@@ -14,7 +14,9 @@ COPY . .
 
 RUN npm install && npx prisma generate
 
-RUN 
+RUN npm run build
+
+RUN cd client && npm install && npm run build
 
 EXPOSE 3001
 
