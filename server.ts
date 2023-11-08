@@ -28,9 +28,10 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../client/build")))
 app.use(routes);
 
-app.get("*", function (req: Request, res: Response) {
+app.get("/*", function (req: Request, res: Response) {
   res.sendFile(path.join(__dirname, "../client/build", "index.html"))
 })
 
