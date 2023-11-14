@@ -1,6 +1,6 @@
 import React from "react";
 import BrandBar from "../../components/brandBar";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import "./login.css";
 
@@ -64,6 +64,11 @@ function Login() {
             Sign in
           </button>
         </form>
+        <button type="button" id="signUpBtn">
+          <Link to="/signup">
+            Signup
+          </Link>
+        </button>
       </section>
     </>
   );

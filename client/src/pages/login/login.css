@@ -12,8 +12,9 @@
     margin-bottom: 5vh;
   }
 
-  #loginBtn {
+  #loginBtn, #signUpBtn, #signUpBtn a {
     background: var(--pink);
+    text-decoration: none;
     color: white;
     font-family: "Helvetica Neue LT Std", sans-serif;
     font-style: normal;
