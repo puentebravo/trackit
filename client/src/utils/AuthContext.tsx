@@ -1,5 +1,5 @@
 
-import React, { FC, createContext, useContext, useState } from "react";
+import React, {createContext, useContext, useState } from "react";
 import {AuthContextType, authObject} from "../@types/client"
 
 interface Props {
