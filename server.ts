@@ -5,11 +5,9 @@ const app = express();
 const routes = require("./routes/apiRoutes");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const path = require('path')
+const path = require("path");
 
 require("dotenv").config();
-
-
 
 app.use(
   session({
@@ -26,15 +24,15 @@ app.use(
     }),
   })
 );
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../client/build")))
+app.use(express.static(path.join(__dirname, "../client/build")));
 app.use(routes);
 
 app.get("/*", function (req: Request, res: Response) {
-  res.sendFile(path.join(__dirname, "../client/build", "index.html"))
-})
-
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server now listening on ${PORT}.`);
