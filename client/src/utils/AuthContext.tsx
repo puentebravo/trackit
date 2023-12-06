@@ -10,7 +10,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuthContext = () => useContext(AuthContext) 
 
-export const AuthProvider: React.FC<Props> = ({ children }) => {
+export const AuthProvider: React.FC<Props> = ({ children }) => { 
    
     const [loggedIn, setLoggedIn] = useState<authObject>({
         loggedIn: false,
