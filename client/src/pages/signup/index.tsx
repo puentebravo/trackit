@@ -2,11 +2,14 @@ import React from "react";
 import BrandBar from "../../components/brandBar";
 import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
+import { AuthContextType } from "../../@types/client";
+import { useAuthContext } from "../../utils/AuthContext";
 import "./signup.css";
 
 function Signup() {
   const navigate = useNavigate();
 
+  const { saveAuth } = useAuthContext() as AuthContextType
   // Initialize formik component, set signup call to run on submit
 
   const formik = useFormik({
@@ -33,7 +36,10 @@ function Signup() {
               "Content-Type": "application/json"
             }
           }).then(response => {
-            if (response.ok) {
+            return response.json()
+          }).then(data => {
+            if (data) {
+              saveAuth(data.user)
               navigate("/home")
             }
           })
@@ -65,7 +71,7 @@ function Signup() {
             value={formik.values.password}
             placeholder="password"
           />
-            <input
+          <input
             type="text"
             name="name"
             id="name"
