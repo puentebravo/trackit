@@ -12,3 +12,24 @@
   margin-left: 5vw;
   color: var(--pink);
 }
+
+#brandBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#logOutBtn {
+  background: var(--pink);
+    text-decoration: none;
+    color: white;
+    font-family: "Helvetica Neue LT Std", sans-serif;
+    font-style: normal;
+    font-weight: 750;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    margin-top: 2vh;
+    border-radius: 8px;
+    height: 54px;
+}
