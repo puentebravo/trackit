@@ -17,7 +17,7 @@ function BrandBar() {
 
     return (
         <header id="brandBar">
-            <h1 id="brandHeader">.solid</h1>
+            <h1 id="brandHeader">.Trackit</h1>
             {loggedIn.loggedIn ?
 
                 <button id="logOutBtn" onClick={signOut}> Log Out </button>
