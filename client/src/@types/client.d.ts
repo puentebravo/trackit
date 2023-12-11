@@ -8,3 +8,8 @@ export type AuthContextType =  {
     saveAuth: (id: string) => void
     handleLogout: () => void
 }
+
+export interface workoutObject {
+    workout: string,
+    length: string
+}
