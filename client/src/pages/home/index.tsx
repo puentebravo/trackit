@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BrandBar from "../../components/brandBar";
 import { useFormik } from "formik"
 import { workoutObject, AuthContextType } from "../../@types/client";
 import { useAuthContext } from "../../utils/AuthContext";
-import { useNavigate } from "react-router-dom";
 import "./home.css"
 import ProgressBar from "../../components/progressBar";
 
@@ -13,7 +12,7 @@ function Home() {
         length: ""
     })
 
-    const navigate = useNavigate()
+
 
     const { loggedIn } = useAuthContext() as AuthContextType
 
@@ -21,27 +20,19 @@ function Home() {
 
     const [submitted, setSubmitted] = useState<Boolean>(false)
 
-    // const repForm = useFormik({
-    //     initialValues: {
-    //         reps: ""
-    //     },
-    //     onSubmit: (values) => {
-    //         console.log(values)
-    //         fetch("/api/rep", {
-    //             method: "POST",
-    //             body: JSON.stringify({...workout, values}),
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             }
-    //         }).then(response => {
-    //             console.log(response)
-
-    //         })
-    //     }
-    // })
-
     const userId = loggedIn.userId
 
+    // resets page state, bringing user back to workout input form
+
+    const handleReset = () => {
+        setWorkout({
+            workout: "",
+            length: ""
+        })
+        setLoading(false)
+        setSubmitted(false)
+    }
+    // saves completed workout with user ID
     const handleSubmit = () => {
         fetch("/api/rep", {
             method: "POST",
@@ -49,17 +40,15 @@ function Home() {
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then( response => {
+        }).then(response => {
             return response.json()
         }).then(data => {
             console.log(data)
-            navigate("/home")
+            handleReset()
         })
-
-
-
     }
 
+    // intializes formik object - in this case, for inputting the desired length of the workout to be generated.
     const minForm = useFormik({
         initialValues: {
             minutes: ""
@@ -115,20 +104,9 @@ function Home() {
             </section>
 
             <section className={workout.workout ? "formContainer" : "formContainer hidden"}>
-                <h3 id="repsHeader">{`Do ${workout.workout}`}</h3>
-                {/* <form id="repsForm" onSubmit={repForm.handleSubmit}>
-                        <input
-                            type="text"
-                            name="reps"
-                            id="reps"
-                            className="formField"
-                            onChange={repForm.handleChange}
-                            value={repForm.values.reps}
-                            placeholder="How many did you do?"
-                        /> */}
+                <h3 id="repsHeader">{`Your workout is... \n ${workout.workout}`}</h3>
                 <button type="button" className="submitBtn" onClick={handleSubmit}>I did it!</button>
-
-                {/* </form> */}
+                <button type="button" className="submitBtn" onClick={handleReset}> Give me another </button>
             </section>
 
         </>
