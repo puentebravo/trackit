@@ -11,5 +11,6 @@ export type AuthContextType =  {
 
 export interface workoutObject {
     workout: string,
-    length: string
+    length: string,
+    instructions: string
 }
