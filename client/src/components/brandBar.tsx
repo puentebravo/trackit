@@ -17,10 +17,10 @@ function BrandBar() {
 
     return (
         <header id="brandBar">
-            <h1 id="brandHeader">.Trackit</h1>
+            <h1 id="brandHeader">.MeetSweats</h1>
             {loggedIn.loggedIn ?
 
-                <button id="logOutBtn" onClick={signOut}> Log Out </button>
+                <button id="logOutLnk" onClick={signOut}> Log Out </button>
                 :
                 <></>
             }
