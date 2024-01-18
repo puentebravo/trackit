@@ -1,13 +1,13 @@
 import React from "react";
 import { AuthContextType } from "../@types/client";
 import { useAuthContext } from "../utils/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 function BrandBar() {
 
-    const {loggedIn,  handleLogout } = useAuthContext() as AuthContextType
-    
+    const { loggedIn, handleLogout } = useAuthContext() as AuthContextType
+
     const navigate = useNavigate()
 
     const signOut = () => {
@@ -17,7 +17,7 @@ function BrandBar() {
 
     return (
         <header id="brandBar">
-            <h1 id="brandHeader">.MeetSweats</h1>
+            <Link to="/home"> <h1 id="brandHeader">.MeetSweats</h1></Link>
             {loggedIn.loggedIn ?
 
                 <button id="logOutLnk" onClick={signOut}> Log Out </button>
