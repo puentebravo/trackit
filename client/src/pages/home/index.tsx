@@ -9,7 +9,8 @@ import ProgressBar from "../../components/progressBar";
 function Home() {
     const [workout, setWorkout] = useState<workoutObject>({
         workout: "",
-        length: ""
+        length: "",
+        instructions: ""
     })
 
 
@@ -17,6 +18,8 @@ function Home() {
     const { loggedIn } = useAuthContext() as AuthContextType
 
     const [loading, setLoading] = useState<Boolean>(false)
+
+    const [sweating, setSweating] = useState<Boolean>(false)
 
     const [submitted, setSubmitted] = useState<Boolean>(false)
 
@@ -27,7 +30,8 @@ function Home() {
     const handleReset = () => {
         setWorkout({
             workout: "",
-            length: ""
+            length: "",
+            instructions: ""
         })
         setLoading(false)
         setSubmitted(false)
@@ -48,32 +52,35 @@ function Home() {
         })
     }
 
-    // intializes formik object - in this case, for inputting the desired length of the workout to be generated.
-    const minForm = useFormik({
-        initialValues: {
-            minutes: ""
-        },
-        onSubmit: ({ minutes }) => {
 
-            setLoading(true)
-            setSubmitted(true)
-            fetch(`/api/workout/${minutes}`)
-                .then(response => response.json())
-                .then(data => {
-                    setLoading(false)
-                    setWorkout({
-                        workout: data.workout,
-                        length: minutes
-                    })
+    const handleTimeSelect = async (time: string) => {
+        setLoading(true);
+        setSubmitted(true)
+        try {
+            const response = await fetch(`/api/workout/${time}`)
+            const prompt = await response.json();
+            setWorkout({
+                workout: prompt.workout,
+                length: time,
+                instructions: prompt.instructions
+            })
 
-                    console.log(data)
+            if (workout.workout) {
+                setLoading(false)
+                setSweating(true)
+            }
 
-                })
+
+        } catch (error) {
+            console.error(error)
         }
-    })
 
+    }
 
+    const sendToGoogle = () => {
+        window.open("https://www.google.com/search?q=gym+near+me&sca_esv=598988451&source=hp&ei=fSqnZbPABrmnptQPkbOWwAQ&iflsig=ANes7DEAAAAAZac4jbHAYTfsj02PgL54CRhsWbPjsyBE&ved=0ahUKEwjz8s2AoOODAxW5k4kEHZGZBUgQ4dUDCA8&uact=5&oq=gym+near+me&gs_lp=Egdnd3Mtd2l6IgtneW0gbmVhciBtZTIOEAAYgAQYsQMYgwEYyQMyCxAAGIAEGIoFGJIDMgsQABiABBiKBRiSAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgARIlSlQtw9Y6SRwBHgAkAEAmAFpoAGZBqoBBDEzLjG4AQPIAQD4AQGoAgrCAhAQLhgDGI8BGOUCGOoCGIwDwgIQEAAYAxiPARjlAhjqAhiMA8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICCBAuGLEDGIAEwgIIEAAYgAQYsQPCAggQLhiABBixA8ICEBAAGIAEGAoYsQMYgwEYsQPCAgsQLhiABBjHARjRA8ICBxAAGIAEGArCAgsQLhiABBixAxiDAcICDhAuGIAEGMcBGK8BGI4FwgIIEAAYgAQYkgPCAg4QLhiABBiKBRixAxiDAcICCxAuGIAEGMcBGK8B&sclient=gws-wiz", '_blank', 'noopener, noreferrer');
 
+    }
 
 
 
@@ -83,19 +90,18 @@ function Home() {
 
             <section className={submitted ? "formContainer hidden" : "formContainer"}>
                 <h3 id="minHeader">How much time do you have?</h3>
-                <form id="repsForm" onSubmit={minForm.handleSubmit}>
-                    <input
-                        type="text"
-                        name="minutes"
-                        id="minutes"
-                        className="formField"
-                        onChange={minForm.handleChange}
-                        value={minForm.values.minutes}
-                        placeholder="Tell us how many minutes you have - we'll do the rest"
-                    />
-                    <button type="submit" className="submitBtn">Give me a workout!</button>
 
-                </form>
+                <button className="timeSelect" onClick={function () {
+                    handleTimeSelect("5 minutes")
+                }}>5 Minutes</button>
+                <button className="timeSelect" onClick={function () {
+                    handleTimeSelect("10 minutes")
+                }}>10 Minutes</button>
+                <button className="timeSelect" onClick={function () {
+                    handleTimeSelect("15 minutes")
+                }}>15 Minutes</button>
+                <button className="timeSelect" onClick={sendToGoogle}>I should probably just hit the gym</button>
+
             </section>
 
             <section className={loading ? "loadSection" : "loadSection hidden"}>
