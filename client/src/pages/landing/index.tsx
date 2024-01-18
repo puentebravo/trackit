@@ -9,13 +9,13 @@ function Landing() {
     // Displays splash screen for five seconds on load
     useEffect( () => {
         setTimeout(() => {
-            navigate("/login")
+            navigate("/home")
         }, 5000)
     }, [])
 
     return (
         <main id="splashText">
-            <h1 id="headerText">.solid</h1>
+            <h1 id="headerText">.MeetSweats</h1>
             <p id="subText">between meeting fitness</p>
         </main>
     )
