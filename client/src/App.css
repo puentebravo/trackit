@@ -2,6 +2,10 @@
   --pink: #ec5d7f;
 }
 
+a {
+  text-decoration: none;
+}
+
 #brandHeader {
   font-family: "Helvetica Neue LT Std", sans-serif;
   font-style: normal;
