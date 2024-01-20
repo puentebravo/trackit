@@ -41,7 +41,7 @@ router.post("/api/rep", async (req: express.Request, res: express.Response) => {
     data: {
       workout: req.body.workout,
       workoutLength: req.body.length,
-      userId: req.body.userId
+      reps: parseInt(req.body.reps)
     }
   })
 
