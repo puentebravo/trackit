@@ -7,6 +7,20 @@
   animation: fadeIn 1s;
 }
 
+#sweatCount {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: -20em;
+}
+
+#minColumnText {
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px;
+  margin-left: 1.5em;
+}
+
 .formField {
   border: 1px solid transparent;
   border-bottom: 1px solid var(--pink);
@@ -14,15 +28,43 @@
 }
 
 .text-bubble {
-  -webkit-text-stroke-width: 1;
+  -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #ec5d7f;
-  font-family: "Helvetica Neue LT Std";
+  font-family: "Helvetica Neue LT Std", sans-serif;
   font-size: 100px;
   font-style: normal;
   font-weight: 750;
   line-height: normal;
+  background: linear-gradient(90deg, #ec5d7f 5%, rgba(236, 93, 127, 0) 69.66%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
+.text-pink {
+  color: #ec5d7f;
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: normal;
+  margin: 5px
+}
+
+#sweatnText {
+  text-align: end;
+  padding-left: 40px;
+}
+
+#doHeader {
+  margin-bottom: -50px;
+  margin-top: 0;
+}
+
+#timerText {
+  text-align: center;
+
+}
 .submitBtn {
   background: var(--pink);
   color: white;
@@ -36,26 +78,49 @@
   border-radius: 8px;
   height: 54px;
 }
+
+#sweatnBtn {
+  margin-top: -7em
+}
 .formContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 80vw;
   margin: auto;
-  margin-top: 45vh;
   animation: fadeIn 1s;
+}
+
+#timeContainer {
+  margin-top: 45vh;
 }
 
 .loadSection {
   width: 50vw;
   margin: auto;
   margin-top: 40vh;
+  animation: fadeIn 1s;
 }
 
 .hidden {
   display: none;
 }
 
+.exercise-list {
+  color: #000;
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  animation: fadeIn 1s;
+  margin-bottom: -7em;
+}
+
+.list-item {
+  margin-bottom: 15px;
+  animation: fadeIn 1s;
+}
 .timeSelect {
   border-radius: 8px;
   border: 1px solid #ec5d7f;
@@ -90,6 +155,10 @@
   font-family: "Helvetica Neue LT Std", sans-serif;
   text-align: center;
   color: var(--pink);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: normal;
 }
 
 /* Loading bar style */
