@@ -6,6 +6,8 @@ import "./home.css"
 import ProgressBar from "../../components/progressBar";
 import MinCounter from "../../components/minCounter";
 import SetTimer from "../../components/setTimer";
+import CountBanner from "../../components/countBanner";
+import { useFormik } from "formik";
 
 function Home() {
     const [workout, setWorkout] = useState<workoutObject>({
@@ -24,6 +26,8 @@ function Home() {
 
     const [minutes, setMinutes] = useState<number>(0)
 
+    const [totalMinutes, setTotalMinutes] = useState<number>(0)
+
     const [submitted, setSubmitted] = useState<Boolean>(false)
 
     // const userId = loggedIn.userId
@@ -36,27 +40,41 @@ function Home() {
             length: "",
             instructions: [""]
         })
+        setTotalMinutes(totalMinutes + minutes)
         setLoading(false)
         setSubmitted(false)
+        setSweating(false)
     }
-    // saves completed workout with user ID
-    // const handleSubmit = () => {
-    //     fetch("/api/rep", {
-    //         method: "POST",
-    //         body: JSON.stringify({ ...workout, userId }),
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         }
-    //     }).then(response => {
-    //         return response.json()
-    //     }).then(data => {
-    //         console.log(data)
-    //         handleReset()
-    //     })
-    // }
+
+    const formik = useFormik({
+        initialValues: {
+            reps: ""
+        },
+        onSubmit: (values) => {
+
+            let workoutObj = {
+                workout: workout.workout,
+                length: workout.length,
+                reps: values.reps
+            }
+            fetch("/api/rep", {
+                method: "POST",
+                body: JSON.stringify(workoutObj),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(response => {
+                if (response.ok) {
+                    handleReset()
+                } else {
+                    console.error(response)
+                }
+            })
+        }
+    })
 
     const handleSweatin = () => {
-
+        setSweating(true)
     }
 
 
@@ -77,10 +95,7 @@ function Home() {
                 instructions: cleanedArr
             })
 
-            console.log(cleanedArr)
-
             setLoading(false)
-
 
         } catch (error) {
             console.error(error)
@@ -100,9 +115,9 @@ function Home() {
             <BrandBar />
 
             {
-                minutes > 0 && !submitted ?
+                totalMinutes > 0 && !submitted ?
                     <section>
-                        <MinCounter minutes={minutes} />
+                        <MinCounter minutes={totalMinutes} />
                     </section>
 
                     :
@@ -139,7 +154,7 @@ function Home() {
             </section>
 
             {
-                workout.workout ?
+                workout.workout && !sweating ?
                     <section className="formContainer">
                         <h2 className="text-bubble" id="doHeader">Do</h2>
                         <h3 id="repsHeader">{`${workout.workout}`}</h3>
@@ -152,12 +167,34 @@ function Home() {
 
                         </ol>
                         <SetTimer minutes={minutes} />
-                        <button type="button" className="timeSelect" id="sweatnBtn" onClick={handleReset}> I'm Sweatin' </button>
+                        <button type="button" className="timeSelect" id="sweatnBtn" onClick={handleSweatin}> I'm Sweatin' </button>
                     </section>
 
                     :
                     <></>
 
+            }
+
+            {
+                sweating ?
+                    <section className="formContainer">
+                        <CountBanner />
+                        <form onSubmit={formik.handleSubmit} id="repsForm">
+                            <input
+                                type="text"
+                                name="reps"
+                                id="reps"
+                                className="formField"
+                                onChange={formik.handleChange}
+                                value={formik.values.reps}
+                                placeholder="So many"
+                            />
+
+                            <button type="submit" className="timeSelect" id="doneBtn"> Done </button>
+                        </form>
+                    </section>
+                    :
+                    <></>
             }
 
         </>
