@@ -30,7 +30,7 @@ function SetTimer(props: timerProps) {
         let secForm = (timeInSeconds % 60).toString()
 
         if (parseInt(secForm) < 10) {
-            secForm.padStart(2, "0")
+           secForm =  secForm.padStart(2, "0")
         }
 
         return `${minuteForm}:${secForm}`
