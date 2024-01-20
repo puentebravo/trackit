@@ -21,10 +21,15 @@
   margin-left: 1.5em;
 }
 
+#sweatColumnText {
+  padding-top: 8em;
+}
+
 .formField {
   border: 1px solid transparent;
   border-bottom: 1px solid var(--pink);
-  margin-bottom: 5vh;
+  margin-bottom: 50vh;
+  
 }
 
 .text-bubble {
@@ -56,9 +61,22 @@
   padding-left: 40px;
 }
 
+
+
+#sweatTextRight {
+  text-align: right;
+  padding-left: 40px;
+}
+
 #doHeader {
   margin-bottom: -50px;
   margin-top: 0;
+}
+
+#sweatHeader {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -4em;
 }
 
 #timerText {
