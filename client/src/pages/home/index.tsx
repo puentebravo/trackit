@@ -86,6 +86,8 @@ function Home() {
             const response = await fetch(`/api/workout/${time}`)
             const prompt = await response.json();
 
+            console.log(prompt)
+
             let cleanedStr = prompt.instructions.replace(/\n/g, "")
             let cleanedArr = cleanedStr.split(/\d\./g)
             cleanedArr.shift()
@@ -94,17 +96,13 @@ function Home() {
                 length: time,
                 instructions: cleanedArr
             })
+            
 
             setLoading(false)
 
         } catch (error) {
             console.error(error)
         }
-
-    }
-
-    const sendToGoogle = () => {
-        window.open("https://www.google.com/search?q=gym+near+me&sca_esv=598988451&source=hp&ei=fSqnZbPABrmnptQPkbOWwAQ&iflsig=ANes7DEAAAAAZac4jbHAYTfsj02PgL54CRhsWbPjsyBE&ved=0ahUKEwjz8s2AoOODAxW5k4kEHZGZBUgQ4dUDCA8&uact=5&oq=gym+near+me&gs_lp=Egdnd3Mtd2l6IgtneW0gbmVhciBtZTIOEAAYgAQYsQMYgwEYyQMyCxAAGIAEGIoFGJIDMgsQABiABBiKBRiSAzIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgARIlSlQtw9Y6SRwBHgAkAEAmAFpoAGZBqoBBDEzLjG4AQPIAQD4AQGoAgrCAhAQLhgDGI8BGOUCGOoCGIwDwgIQEAAYAxiPARjlAhjqAhiMA8ICCxAAGIAEGLEDGIMBwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICCBAuGLEDGIAEwgIIEAAYgAQYsQPCAggQLhiABBixA8ICEBAAGIAEGAoYsQMYgwEYsQPCAgsQLhiABBjHARjRA8ICBxAAGIAEGArCAgsQLhiABBixAxiDAcICDhAuGIAEGMcBGK8BGI4FwgIIEAAYgAQYkgPCAg4QLhiABBiKBRixAxiDAcICCxAuGIAEGMcBGK8B&sclient=gws-wiz", '_blank', 'noopener, noreferrer');
 
     }
 
@@ -139,8 +137,6 @@ function Home() {
                         <button className="timeSelect" onClick={function () {
                             handleTimeSelect("15")
                         }}>15 Minutes</button>
-                        <button className="timeSelect" onClick={sendToGoogle}>I should probably just hit the gym</button>
-
                     </section>
 
                     :
@@ -166,7 +162,7 @@ function Home() {
                             }
 
                         </ol>
-                        <SetTimer minutes={minutes} />
+                        <SetTimer minutes={minutes} setSweating={setSweating} />
                         <button type="button" className="timeSelect" id="sweatnBtn" onClick={handleSweatin}> I'm Sweatin' </button>
                     </section>
 
