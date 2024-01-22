@@ -40,7 +40,6 @@
   font-style: normal;
   font-weight: 750;
   line-height: normal;
-  background: linear-gradient(90deg, #ec5d7f 5%, rgba(236, 93, 127, 0) 69.66%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -113,7 +112,8 @@
 }
 
 #timeContainer {
-  margin-top: 45vh;
+  margin-top: 54vh;
+  margin-left: 42px;
 }
 
 .loadSection {
@@ -171,15 +171,25 @@
 }
 
 #repsHeader,
-#minHeader,
 #loadHeader {
   font-family: "Helvetica Neue LT Std", sans-serif;
-  text-align: center;
+  text-align: left;
   color: var(--pink);
   font-size: 22px;
   font-style: normal;
   font-weight: 750;
   line-height: normal;
+}
+
+#minHeader {
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  text-align: center;
+  color: var(--pink);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: normal;
+  margin-bottom: 22px;
 }
 
 /* Loading bar style */
