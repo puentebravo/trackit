@@ -2,18 +2,20 @@ import React, {useState, useEffect} from "react";
 
 
 interface timerProps {
-    minutes: number
+    minutes: number, 
+    setSweating: (params: boolean) => any
 }
 
 function SetTimer(props: timerProps) {
 
     const [seconds, setSeconds] = useState<number>(props.minutes * 60)
-
+    const setSweating = props.setSweating
 
     
     useEffect(() => {
 
         if (seconds <= 0) {
+            setSweating(true)
             return;
         }
         setTimeout(()=> {
