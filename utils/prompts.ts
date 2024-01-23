@@ -24,7 +24,7 @@ const promptWorkout = async (time: string) => {
   try {
     const prompt = new PromptTemplate({
       template:
-        "I'm a remote worker that barely moves all day, and I have only {time} minutes before my next meeting. Please give me one exercise I can do before my next meeting as if you're a world class trainer with an in-depth knowledge of fitness and exercise techniques. This should be a single exercise, able to be completed with a minimum of equipment.  \n{format_instructions}",
+        "I'm a remote worker that barely moves all day, and I have only {time} minutes before my next meeting. Please give me one exercise I can do before my next meeting as if you're a world class trainer with an in-depth knowledge of fitness and exercise techniques. This should be a single exercise, able to be completed with a minimum of equipment. The response should include a numbered list of instructions on how to do the workout.  \n{format_instructions}",
       inputVariables: ["time"],
       partialVariables: { format_instructions: formatInstructions },
     });
