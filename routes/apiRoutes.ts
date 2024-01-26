@@ -1,6 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-import promptWorkout from "../utils/prompts";
+import {promptOneWorkout, promptTwoWorkouts, promptThreeWorkouts} from "../utils/prompts";
 import { body, validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 
@@ -25,14 +25,27 @@ router.get("/api/test", async (req: express.Request, res: express.Response) => {
 });
 
 router.get(
-  "/api/workout/:time",
+  "/api/workout/:workout",
   async (req: express.Request, res: express.Response) => {
 
-    const promptTime: string = req.params.time
+    const promptTime: string = req.params.workout
 
-    const workout = await promptWorkout(promptTime);
-
-    res.json(workout);
+    switch (promptTime) {
+      case "1":
+        const workout = await promptOneWorkout()
+        res.json(workout)
+        break;
+      case "2": 
+        const twoWorkouts = await promptTwoWorkouts()
+        res.json(twoWorkouts)
+        break;
+      case "3":
+        const threeWorkouts = await promptThreeWorkouts()
+        res.json(threeWorkouts)
+        break;
+      default:
+        res.status(500).json({error: "Server Error: Number of workouts not received"})
+    }
   }
 );
 
