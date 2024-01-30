@@ -7,11 +7,68 @@
   animation: fadeIn 1s;
 }
 
+/* week Tracker styling */
+
+#weekTracker {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 3px;
+}
+
+.weekday-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text-fade {
+  color: #000;
+  text-align: center;
+  font-family: "Helvetica Neue LT Std", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: normal;
+  opacity: 0.2;
+}
+
+.color-box {
+  width: 48.391px;
+  height: 48.391px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 1px solid #ec5d7f;
+}
+
+/* calorie counter */
+
+#sweatCalories {
+  text-align: center;
+  margin-top: 11.35px;
+}
+
+#calHeader {
+  font-size: 65px;
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+
+#metricsHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#countForm {
+  margin-top: 400px;
+}
+
 #sweatCount {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: -20em;
+  margin-bottom: -100px
 }
 
 #minColumnText {
@@ -28,8 +85,8 @@
 .formField {
   border: 1px solid transparent;
   border-bottom: 1px solid var(--pink);
-  margin-bottom: 50vh;
-  
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .text-bubble {
@@ -45,6 +102,15 @@
   -webkit-text-fill-color: transparent;
 }
 
+.text-bold {
+  color: #ec5d7f;
+  font-family: "Helvetica Neue LT Std";
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 750;
+  line-height: normal;
+}
+
 .text-pink {
   color: #ec5d7f;
   font-family: "Helvetica Neue LT Std", sans-serif;
@@ -52,7 +118,7 @@
   font-style: normal;
   font-weight: 750;
   line-height: normal;
-  margin: 5px
+  margin: 0px;
 }
 
 #sweatnText {
@@ -60,11 +126,13 @@
   padding-left: 40px;
 }
 
-
-
 #sweatTextRight {
-  text-align: right;
-  padding-left: 40px;
+  text-align: center;
+  padding-left: 50px;
+}
+
+#sweatTextLeft {
+  padding-right: 50px;
 }
 
 #doHeader {
@@ -74,13 +142,24 @@
 
 #sweatHeader {
   display: flex;
-  flex-direction: row;
-  margin-bottom: -4em;
+  text-align: center;
+  flex-direction: column;
+  margin-bottom: 46px;
+}
+
+
+
+#kcalSpan {
+  font-size: 35px;
 }
 
 #timerText {
-  text-align: center;
+  text-align: center
+}
 
+#repCounter {
+  margin: 0;
+  margin-top: -36px;
 }
 .submitBtn {
   background: var(--pink);
@@ -97,10 +176,8 @@
 }
 
 #sweatnBtn {
-  margin-top: -7em
+  margin-top: -7em;
 }
-
-
 
 .formContainer {
   display: flex;
@@ -112,8 +189,15 @@
 }
 
 #timeContainer {
-  margin-top: 54vh;
   margin-left: 42px;
+}
+
+.short-margin {
+  margin-top: 53.64px;
+}
+
+.long-margin {
+  margin-top: 381px;
 }
 
 .loadSection {
@@ -135,7 +219,8 @@
   font-weight: 300;
   line-height: normal;
   animation: fadeIn 1s;
-  margin-bottom: -7em;
+  margin-bottom: -2em;
+  min-height: 287px;
 }
 
 .list-item {
@@ -170,6 +255,16 @@
   justify-content: center;
 }
 
+#repsFormRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#minusSvg {
+  padding-top: 20px;
+}
+
 #repsHeader,
 #loadHeader {
   font-family: "Helvetica Neue LT Std", sans-serif;
@@ -179,6 +274,7 @@
   font-style: normal;
   font-weight: 750;
   line-height: normal;
+  margin-left: 5px;
 }
 
 #minHeader {
