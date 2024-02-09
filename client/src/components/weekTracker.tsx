@@ -19,7 +19,7 @@ function WeekTracker() {
 
         setWeeklyMetrics(newMetrics)
 
-    }, [])
+    }, )
 
     const calculateColor = (minutes: number) => {
         let colorClass;
