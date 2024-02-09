@@ -1,5 +1,7 @@
 :root {
   --pink: #ec5d7f;
+  --lightPink: #FFC6D3;
+  --medPink: #FFB2C5;
 }
 
 #brandHeader,
@@ -39,6 +41,18 @@
   flex-shrink: 0;
   border-radius: 7px;
   border: 1px solid #ec5d7f;
+}
+
+.back-light {
+  background-color: var(--lightPink);
+}
+
+.back-med {
+  background-color: var(--medPink);
+}
+
+.back-dark {
+  background-color: var(--pink);
 }
 
 /* calorie counter */
