@@ -56,8 +56,8 @@ function Home() {
         if (storedMetrics) {
             let parsedMetrics = JSON.parse(storedMetrics)
             let updatedData = {
-                minutesDone: parsedMetrics.minutesDone + totalMinutes,
-                calsBurned: parsedMetrics.calsBurned + totalCal
+                minutesDone: parsedMetrics.minutesDone + minutes,
+                calsBurned: parsedMetrics.calsBurned + calories
             }
 
             localStorage.setItem(`${today}`, JSON.stringify(updatedData))
