@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "concurrently \"npm start\" \"jest\" ",
-    "start": "ts-node server.ts",
+    "start": "concurrently \"ts-node server.ts\" \"cd client && npm start\" ",
     "seed": "ts-node prisma/seeds.ts",
     "build": "tsc",
     "prod": "node build/server.js"
