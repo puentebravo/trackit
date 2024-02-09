@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BrandBar from "../../components/brandBar";
 import { workoutObject, AuthContextType, currentWorkoutObject } from "../../@types/client";
 // import { useAuthContext } from "../../utils/AuthContext";
@@ -7,12 +7,12 @@ import ProgressBar from "../../components/progressBar";
 import MinCounter from "../../components/minCounter";
 import SetTimer from "../../components/setTimer";
 import CountBanner from "../../components/countBanner";
-import { CallTracker } from "assert";
 import CalCounter from "../../components/calCounter";
 import WeekTracker from "../../components/weekTracker";
 // import { useFormik } from "formik";
 
 function Home() {
+
     const [workout, setWorkout] = useState<workoutObject>({
         workout: "",
         length: "",
@@ -46,9 +46,41 @@ function Home() {
 
     // const userId = loggedIn.userId
 
+    // Grabs date, saves daily metrics to localstorage on render
+    const today: number = new Date(Date.now()).getDay()
+
+    useEffect(() => {
+
+        const storedMetrics = localStorage.getItem(`${today}`)
+
+        if (storedMetrics) {
+            let parsedMetrics = JSON.parse(storedMetrics)
+            let updatedData = {
+                minutesDone: parsedMetrics.minutesDone + totalMinutes,
+                calsBurned: parsedMetrics.calsBurned + totalCal
+            }
+
+            localStorage.setItem(`${today}`, JSON.stringify(updatedData))
+        } else {
+
+            let todayData = {
+                minutesDone: totalMinutes,
+                calsBurned: totalCal
+            }
+
+            if (today !== 0 && today !== 6) {
+                localStorage.setItem(`${today}`, JSON.stringify(todayData))
+            }
+        }
+
+    }, [totalMinutes, totalCal])
+
+
+
+
+
+
     // resets page state, bringing user back to workout input form
-
-
 
     const handleReset = () => {
         setWorkout({
@@ -60,8 +92,8 @@ function Home() {
             workout: "",
             instructions: [""]
         })
-        setTotalMinutes(totalMinutes + minutes)
-        setTotalCal(totalCal + calories)
+        setTotalMinutes((totalMinutes) => totalMinutes + minutes)
+        setTotalCal((totalCal) => totalCal + calories)
         setLoading(false)
         setSubmitted(false)
         setSweating(false)
@@ -98,6 +130,7 @@ function Home() {
     // })
 
     const handleSubmit = async () => {
+
         let workoutObj = {
             workout: workout.workout,
             length: workout.length,
