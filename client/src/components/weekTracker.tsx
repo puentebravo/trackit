@@ -4,6 +4,8 @@ function WeekTracker() {
 
     const [weeklyMetrics, setWeeklyMetrics] = useState([0, 0, 0, 0, 0])
 
+    console.log(weeklyMetrics)
+
     useEffect(() => {
 
         let newMetrics = weeklyMetrics.map((element, index) => {
@@ -11,7 +13,7 @@ function WeekTracker() {
 
             if (storageObj) {
                 let parsedObj = JSON.parse(storageObj);
-                return element + parsedObj.minutesDone
+                return parsedObj.minutesDone
             } else {
                 return 0
             }
@@ -19,14 +21,15 @@ function WeekTracker() {
 
         setWeeklyMetrics(newMetrics)
 
-    }, )
+    }, [])
 
     const calculateColor = (minutes: number) => {
+        console.log(minutes)
         let colorClass;
-        if (minutes > 0 && minutes < 5) {
+        if (minutes > 0 && minutes <= 5) {
             colorClass = "back-light"
-        } else if (minutes > 5 && minutes < 10) {
-            colorClass = "back-mid"
+        } else if (minutes > 5 && minutes <= 10) {
+            colorClass = "back-med"
         } else if (minutes > 10) {
             colorClass = "back-dark"
         } else {
