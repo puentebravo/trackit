@@ -24,6 +24,10 @@ function Home() {
         instructions: [""]
     })
 
+    const [workouts, setWorkouts] = useState([{}])
+
+    const [day, setDay] = useState<string>("so far")
+
     // const { loggedIn } = useAuthContext() as AuthContextType
 
     const [loading, setLoading] = useState<Boolean>(false)
@@ -88,10 +92,6 @@ function Home() {
             length: "",
             instructions: [""]
         })
-        setCurrentWorkout({
-            workout: "",
-            instructions: [""]
-        })
         setTotalMinutes((totalMinutes) => totalMinutes + minutes)
         setTotalCal((totalCal) => totalCal + calories)
         setLoading(false)
@@ -101,33 +101,6 @@ function Home() {
 
     }
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         reps: 0
-    //     },
-    //     onSubmit: (values) => {
-
-    //         let workoutObj = {
-    //             workout: workout.workout,
-    //             length: workout.length,
-    //             reps: values.reps
-    //         }
-    //         fetch("/api/rep", {
-    //             method: "POST",
-    //             body: JSON.stringify(workoutObj),
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             }
-    //         }).then(response => {
-
-    //             if (response.ok) {
-    //                 handleReset()
-    //             } else {
-    //                 console.error(response)
-    //             }
-    //         })
-    //     }
-    // })
 
     const handleSubmit = async () => {
 
@@ -146,16 +119,20 @@ function Home() {
 
         })
 
-        if (postReps.ok) {
-            handleReset();
+        if (postReps.ok && numWorkouts > 0) {
+            handleReset()
+            handleTimeSelect("5", `${numWorkouts - 1}`)
+        } else if(postReps.ok && numWorkouts === 0){
+            handleReset()
         } else {
             console.error(postReps)
+            handleReset()
         }
-
+        
     }
 
 
-
+    
 
 
     const handleSweatin = () => {
@@ -167,9 +144,11 @@ function Home() {
         setLoading(true)
         setSubmitted(true)
         setMinutes(parseInt(time))
+        setNumWorkouts(parseInt(workouts))
+        
 
         try {
-            const response = await fetch(`/api/workout/${workouts}`)
+            const response = await fetch(`/api/workout/1`)
             const prompt = await response.json();
 
 
@@ -190,31 +169,14 @@ function Home() {
                 cleanedCal = parseInt(prompt.calories)
             }
 
-
             setLoading(false)
+            setSweating(false)
             setCalories(cleanedCal)
-
         } catch (error) {
             console.error(error)
         }
 
     }
-
-    // const handleMultipleWorkouts = async (time: string, workouts: string) => {
-    //     setLoading(true);
-    //     setSubmitted(true)
-    //     setMinutes(parseInt(time))
-
-    //     try {
-    //         const response = await fetch(`/api/workout/${workouts}`)
-    //         const prompt = await response.json();
-
-
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
 
 
     return (
@@ -224,7 +186,7 @@ function Home() {
             {
                 totalMinutes > 0 && !submitted ?
                     <section id="metricsHeader">
-                        <MinCounter minutes={totalMinutes} />
+                        <MinCounter minutes={totalMinutes} day={day} />
                         <WeekTracker />
                         <CalCounter calories={totalCal} />
                     </section>
@@ -240,13 +202,13 @@ function Home() {
                         <h3 id="minHeader">{totalMinutes > 0 ? "Got time to sweat again?" : "How much time do you have?"}</h3>
 
                         <button className="timeSelect" onClick={function () {
-                            handleTimeSelect("5", "1")
+                            handleTimeSelect("5", "0")
                         }}>5 Minutes</button>
                         <button className="timeSelect" onClick={function () {
-                            handleTimeSelect("10", "2")
+                            handleTimeSelect("5", "1")
                         }}>10 Minutes</button>
                         <button className="timeSelect" onClick={function () {
-                            handleTimeSelect("15", "3")
+                            handleTimeSelect("5", "2")
                         }}>15 Minutes</button>
                     </section>
 
@@ -290,38 +252,21 @@ function Home() {
                 sweating ?
                     <section id="countForm" className="formContainer">
                         <CountBanner />
-                        {/* <form onSubmit={formik.handleSubmit} id="repsForm"> */}
                         <div id="repsFormRow">
                             <div onClick={() => setReps(reps - 1)}>
                                 <svg id="minusSvg" width="37" height="16" viewBox="0 0 37 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.455469 15.7V0.299999H36.3555V15.7H0.455469Z" fill="#EC5D7F" />
                                 </svg>
-
                             </div>
-
-                            {/* <input
-                                        type="text"
-                                        name="reps"
-                                        id="reps"
-                                        className="formField"
-                                        onChange={formik.handleChange}
-                                        value={formik.values.reps}
-                                        placeholder=""
-                                    /> */}
-
                             <h1 className="text-bubble" id="repCounter">{reps <= 0 ? "#" : reps}</h1>
-                            {/* put text here - overlay it with the form? Set value to form state. */}
+                           
                             <div onClick={() => setReps(reps + 1)}>
                                 <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.645 18.7V0.399996H32.645V18.7H50.945V32.7H32.645V51H18.645V32.7H0.34502V18.7H18.645Z" fill="#EC5D7F" />
                                 </svg>
-
                             </div>
-
                         </div>
-
                         <button type="button" className="timeSelect" id="doneBtn" onClick={handleSubmit}> {numWorkouts > 0 ? "Next" : "Done"} </button>
-                        {/* </form> */}
                     </section>
                     :
                     <></>
