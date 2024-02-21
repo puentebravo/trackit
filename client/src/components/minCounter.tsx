@@ -1,7 +1,8 @@
 import React from "react";
 
 interface minutes {
-    minutes: number
+    minutes: number,
+    day: string
 }
 
 function MinCounter(props: minutes) {
@@ -12,7 +13,7 @@ function MinCounter(props: minutes) {
             <aside id="minColumnText">
                 <p className="text-pink">minutes</p>
                 <p className="text-pink" id="sweatnText">sweatin'</p>
-                <p className="text-pink">so far</p>
+                <p className="text-pink">{props.day}</p>
             </aside>
 
         </section>
