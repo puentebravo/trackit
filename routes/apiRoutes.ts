@@ -25,7 +25,7 @@ router.get("/api/test", async (req: express.Request, res: express.Response) => {
 });
 
 router.get(
-  "/api/workout/:workout",
+  "/api/workout/",
   async (req: express.Request, res: express.Response) => {
     const workout = await promptOneWorkout();
     res.json(workout);
