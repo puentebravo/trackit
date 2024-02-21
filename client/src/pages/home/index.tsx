@@ -148,7 +148,7 @@ function Home() {
         
 
         try {
-            const response = await fetch(`/api/workout/1`)
+            const response = await fetch(`/api/workout/`)
             const prompt = await response.json();
 
 
