@@ -187,7 +187,7 @@ function Home() {
                 totalMinutes > 0 && !submitted ?
                     <section id="metricsHeader">
                         <MinCounter minutes={totalMinutes} day={day} />
-                        <WeekTracker />
+                        <WeekTracker day={today}/>
                         <CalCounter calories={totalCal} />
                     </section>
 
