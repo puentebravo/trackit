@@ -55,6 +55,14 @@
   background-color: var(--pink);
 }
 
+.today {
+  
+  transition: all 1s;
+  transform-origin: top;
+  transform: scaleY(1.55);
+
+}
+
 /* calorie counter */
 
 #sweatCalories {
