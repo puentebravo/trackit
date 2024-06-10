@@ -25,6 +25,8 @@ app.use(
   })
 );
 
+console.log("Session info:" , session)
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../client/build")));

@@ -4,7 +4,7 @@
   "description": "a fitness tracking app for the busy",
   "main": "index.js",
   "scripts": {
-    "test": "concurrently \"npm start\" \"jest\" ",
+    "test": "concurrently \"ts-node server.ts\" \"jest\" ",
     "start": "concurrently \"ts-node server.ts\" \"cd client && npm start\" ",
     "seed": "ts-node prisma/seeds.ts",
     "build": "tsc",
