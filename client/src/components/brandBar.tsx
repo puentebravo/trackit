@@ -17,7 +17,7 @@ function BrandBar() {
 
     return (
         <header id="brandBar">
-            <Link to="/home"> <h1 id="brandHeader">.MeetSweats</h1></Link>
+            <Link to="/home"> <h1 id="brandHeader">.TrackIt</h1></Link>
             {loggedIn.loggedIn ?
 
                 <button id="logOutLnk" onClick={signOut}> Log Out </button>
