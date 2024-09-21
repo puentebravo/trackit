@@ -4,6 +4,7 @@ import { workoutObject, AuthContextType, currentWorkoutObject } from "../../@typ
 // import { useAuthContext } from "../../utils/AuthContext";
 import "./home.css"
 import ProgressBar from "../../components/progressBar";
+import { cardio } from "ldrs"
 import MinCounter from "../../components/minCounter";
 import SetTimer from "../../components/setTimer";
 import CountBanner from "../../components/countBanner";
@@ -12,6 +13,8 @@ import WeekTracker from "../../components/weekTracker";
 // import { useFormik } from "formik";
 
 function Home() {
+
+    cardio.register()
 
     const [workout, setWorkout] = useState<workoutObject>({
         workout: "",
@@ -122,17 +125,17 @@ function Home() {
         if (postReps.ok && numWorkouts > 0) {
             handleReset()
             handleTimeSelect("5", `${numWorkouts - 1}`)
-        } else if(postReps.ok && numWorkouts === 0){
+        } else if (postReps.ok && numWorkouts === 0) {
             handleReset()
         } else {
             console.error(postReps)
             handleReset()
         }
-        
+
     }
 
 
-    
+
 
 
     const handleSweatin = () => {
@@ -145,7 +148,7 @@ function Home() {
         setSubmitted(true)
         setMinutes(parseInt(time))
         setNumWorkouts(parseInt(workouts))
-        
+
 
         try {
             const response = await fetch(`/api/workout/`)
@@ -187,7 +190,7 @@ function Home() {
                 totalMinutes > 0 && !submitted ?
                     <section id="metricsHeader">
                         <MinCounter minutes={totalMinutes} day={day} />
-                        <WeekTracker day={today}/>
+                        <WeekTracker day={today} />
                         <CalCounter calories={totalCal} />
                     </section>
 
@@ -220,7 +223,18 @@ function Home() {
                 loading ?
                     <section className="loadSection">
                         <h3 id="loadHeader">Creating your custom workout - get psyched!</h3>
-                        <ProgressBar />
+                        <section id="loaderContainer">
+                            {/* @ts-ignore */}
+                            <l-cardio
+                                size="50"
+                                stroke="4"
+                                speed="2"
+                                color="#ec5d7f"
+                            // @ts-ignore
+                            ></l-cardio>
+
+                        </section>
+
                     </section>
                     :
                     <></>
@@ -259,7 +273,7 @@ function Home() {
                                 </svg>
                             </div>
                             <h1 className="text-bubble" id="repCounter">{reps <= 0 ? "#" : reps}</h1>
-                           
+
                             <div onClick={() => setReps(reps + 1)}>
                                 <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M18.645 18.7V0.399996H32.645V18.7H50.945V32.7H32.645V51H18.645V32.7H0.34502V18.7H18.645Z" fill="#EC5D7F" />
