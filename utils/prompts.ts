@@ -8,7 +8,7 @@ const model = new OpenAI({
   openAIApiKey: process.env.OPENAI_API_KEY,
   temperature: 0.7,
   topP: 0.6,
-  modelName: "gpt-4o-mini",
+  modelName: "gpt-3.5-turbo",
 });
 
 const parser = StructuredOutputParser.fromNamesAndDescriptions({
