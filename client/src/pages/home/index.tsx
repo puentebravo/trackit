@@ -14,6 +14,10 @@ import WeekTracker from "../../components/weekTracker";
 
 function Home() {
 
+
+
+
+
     cardio.register()
 
     const [workout, setWorkout] = useState<workoutObject>({
