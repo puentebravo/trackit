@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(uuid())
   username    String  @unique
   isFederated Boolean
   name        String?
@@ -20,7 +20,7 @@ model User {
 }
 
 model Reps {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  id            String @id @default(uuid()) 
   workout       String
   workoutLength String
   reps          Int
