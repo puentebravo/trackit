@@ -3,7 +3,7 @@ import BrandBar from "../../components/brandBar";
 import { workoutObject, AuthContextType, currentWorkoutObject } from "../../@types/client";
 // import { useAuthContext } from "../../utils/AuthContext";
 import "./home.css"
-import ProgressBar from "../../components/progressBar";
+
 import { cardio } from "ldrs"
 import MinCounter from "../../components/minCounter";
 import SetTimer from "../../components/setTimer";
