@@ -41,6 +41,12 @@ router.post("/api/rep", async (req: express.Request, res: express.Response) => {
     },
   });
 
+  if (!newWorkout) {
+    res.status(202).json({
+      message: "Data received, but no database available. Redirecting to local."
+    })
+  }
+
   res.json(newWorkout);
 });
 
