@@ -132,7 +132,14 @@ function Home() {
         } else if (postReps.ok && numWorkouts === 0) {
             handleReset()
         } else {
-            console.error(postReps)
+            let localData;
+            let tempReps = localStorage.getItem("tempReps") 
+            if (tempReps) {
+                localData = JSON.parse(tempReps)
+            } else {
+                localData = []
+            }
+            localData.push(workoutObj)
             handleReset()
         }
 
