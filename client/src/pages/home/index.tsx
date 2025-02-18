@@ -110,7 +110,7 @@ function Home() {
 
 
     const handleSubmit = async () => {
-
+        
         let workoutObj = {
             workout: workout.workout,
             length: workout.length,
@@ -165,6 +165,8 @@ function Home() {
             const response = await fetch(`/api/workout/`)
             const prompt = await response.json();
 
+            
+
 
             let cleanedStr = prompt.instructions.replace(/\n/g, "")
             let cleanedArr = cleanedStr.split(/\d\./g)
@@ -174,6 +176,8 @@ function Home() {
                 length: time,
                 instructions: cleanedArr
             })
+
+            console.log(workout)
 
             let cleanedCal;
 
