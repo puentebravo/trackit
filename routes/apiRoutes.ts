@@ -33,21 +33,23 @@ router.get(
 );
 
 router.post("/api/rep", async (req: express.Request, res: express.Response) => {
-  const newWorkout = await prisma.reps.create({
-    data: {
-      workout: req.body.workout,
-      workoutLength: req.body.length,
-      reps: parseInt(req.body.reps),
-    },
+  // const newWorkout = await prisma.reps.create({
+  //   data: {
+  //     workout: req.body.workout,
+  //     workoutLength: req.body.length,
+  //     reps: parseInt(req.body.reps),
+  //   },
+  // });
+
+  // if (!newWorkout) {
+  //   res.status(202).json({
+  //     message: "Data received, but no database available. Redirecting to local."
+  //   })
+  // }
+
+  res.status(200).json({
+    message: "Message received, but database is offline."
   });
-
-  if (!newWorkout) {
-    res.status(202).json({
-      message: "Data received, but no database available. Redirecting to local."
-    })
-  }
-
-  res.json(newWorkout);
 });
 
 router.post(
